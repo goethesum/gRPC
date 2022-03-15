@@ -31,7 +31,7 @@ func New() (Store, error) {
 		dbSSLMode,
 	)
 
-	db, err := sqlx.Connect("postgress", connectionString)
+	db, err := sqlx.Connect("postgres", connectionString)
 	if err != nil {
 		return Store{}, err
 	}
