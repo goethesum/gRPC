@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/goethesum/gRPC/internal/rocket"
@@ -40,8 +41,19 @@ func New() (Store, error) {
 	}, nil
 }
 
+// GetRocketByID - retrieves a rocket from the database by id
 func (s Store) GetRocketByID(id string) (rocket.Rocket, error) {
-	return rocket.Rocket{}, nil
+	var rkt rocket.Rocket
+	row := s.db.QueryRow(
+		`SELECT id FROM rockets where id=$1;`,
+		id,
+	)
+	err := row.Scan(&rkt.ID)
+	if err != nil {
+		log.Print(err.Error())
+		return rocket.Rocket{}, err
+	}
+	return rkt, nil
 }
 
 func (s Store) InsertRocket(rkt rocket.Rocket) (rocket.Rocket, error) {
