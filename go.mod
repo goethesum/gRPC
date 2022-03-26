@@ -25,6 +25,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/jmoiron/sqlx v1.3.4 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/satori/go.uuid v1.2.0
 	golang.org/x/mod v0.4.2 // indirect
 	golang.org/x/sys v0.0.0-20211013075003-97ac67df715c // indirect
 	golang.org/x/tools v0.1.5 // indirect
