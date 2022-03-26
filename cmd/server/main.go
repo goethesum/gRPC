@@ -5,6 +5,7 @@ import (
 
 	"github.com/goethesum/gRPC/internal/db"
 	"github.com/goethesum/gRPC/internal/rocket"
+	"google.golang.org/grpc"
 )
 
 func Run() error {
@@ -19,7 +20,13 @@ func Run() error {
 		log.Println("Failed to run migrations")
 		return err
 	}
-	_ = rocket.New(rocketStore)
+	rktService := rocket.New(rocketStore)
+
+	rktHandler := grpc.New(rktService)
+	if err := rktHandler.Serve(); err != nil {
+		return err
+	}
+
 	return nil
 }
 
